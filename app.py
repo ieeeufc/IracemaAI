@@ -34,9 +34,6 @@ def _get_session():
 if 'chat_history' not in st.session_state:
     st.session_state.chat_history = []
 
-if 'conn' not in st.session_state:
-    st.session_state.conn = st.connection('gsheets', type=GSheetsConnection)
-
 
 def current_time():
     return datetime.now().strftime('%Y-%m-%d-%H:%M:%S')
@@ -87,11 +84,12 @@ if user_query is not None and user_query != '':
 
     streamlit_feedback(
         feedback_type='thumbs',
-        optional_text_label='[Opcional] Por favor, forneça mais informações',
+        optional_text_label='[Opcional] Por favor, for',
         key='feedback',
     )
 
 if 'feedback' in st.session_state and st.session_state['feedback'] is not None:
+    conn = st.connection("gsheets", type=GSheetsConnection)
     user_feedback = {
         'session_id': _get_session(),
         'inserted_at': current_time(),
@@ -103,9 +101,9 @@ if 'feedback' in st.session_state and st.session_state['feedback'] is not None:
         'feedback_text': st.session_state['feedback']['text'],
     }
 
-    actual = st.session_state.conn.read(worksheet='feedback', max_entries=None)
+    actual = conn.read(worksheet='feedback', max_entries=None)
     update = pd.concat(
         [actual, pd.DataFrame(user_feedback, index=[0])], ignore_index=True
     )
-    st.session_state.conn.update(worksheet='feedback', data=update)
-    st.session_state.conn.reset()
+    conn.update(worksheet='feedback', data=update)
+    conn.reset()
