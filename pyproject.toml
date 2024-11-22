@@ -47,7 +47,7 @@ quote-style = 'single'
 [tool.taskipy.tasks]
 lint = 'ruff check .; ruff check . --diff'
 format = 'ruff check . --fix; ruff format .'
-run = 'streamlit run app.py'
+run = 'streamlit run app.py --server.fileWatcherType none'
 pre_test = 'task lint'
 test = 'pytest -s -x --cov=ieee_assistant -vv'
 post_test = 'coverage html'
