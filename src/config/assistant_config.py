@@ -22,7 +22,7 @@ from src.core.utils import read_yaml_file
 
 load_dotenv()
 
-ASSISTANT_CONFIG_PATH = "src/config/ieee_assistant.yaml"
+ASSISTANT_CONFIG_PATH = 'src/config/ieee_assistant.yaml'
 
 
 @dataclasses.dataclass

@@ -10,7 +10,7 @@ from src.core.embeddings import get_embedding_function
 
 load_dotenv()
 
-CHROMA_PATH = "chroma/"
+CHROMA_PATH = 'chroma/'
 
 DB = Chroma(
     persist_directory=CHROMA_PATH,

@@ -1,15 +1,13 @@
-import os
 from typing import List
 
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_core.documents import Document
 from langchain_experimental.text_splitter import SemanticChunker
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from src.core.embeddings import get_embedding_function
 
-PDFS_PATH = "docs/"
+PDFS_PATH = 'docs/'
 
 
 load_dotenv()
@@ -42,7 +40,7 @@ def split_documents(documents: List[Document]) -> List[Document]:
         List[Document]: A list of Document objects that have been split into
         smaller chunks.
     """
-    
+
     splitter = SemanticChunker(get_embedding_function())
-    #splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    # splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     return splitter.split_documents(documents)
