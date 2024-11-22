@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from langchain_core.documents import Document
 
-from src.core.database import DB
+from src.core.database import Database
 
 load_dotenv()
 
@@ -27,7 +27,7 @@ class Retriever:
     """
 
     def __init__(self):
-        self.database = DB
+        self.database = Database().database
 
     def query_rag(self, query_text: str) -> list[Document]:
         """

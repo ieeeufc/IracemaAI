@@ -12,11 +12,12 @@ load_dotenv()
 
 CHROMA_PATH = 'chroma/'
 
-DB = Chroma(
+class Database:
+    def __init__(self):
+        self.database = Chroma(
     persist_directory=CHROMA_PATH,
     embedding_function=get_embedding_function(),
 )
-
 
 def assign_chunk_ids(chunks: List[Document]) -> List[Document]:
     """
@@ -64,8 +65,9 @@ def add_to_chroma(chunks: List[Document]):
         chunks (List[Document]): A list of Document objects to be added to the
         database.
     """
+    db = Database()
     chunks_with_ids = assign_chunk_ids(chunks)
-    existing_items = DB.get(include=[])  # IDs are always included by default
+    existing_items = db.database.get(include=[])  # IDs are always included by default
     existing_ids = set(existing_items['ids'])
     print(f'Number of existing documents in DB: {len(existing_ids)}')
 
@@ -77,7 +79,7 @@ def add_to_chroma(chunks: List[Document]):
     if new_chunks:
         print(f'👉 Adding new documents: {len(new_chunks)}')
         new_chunk_ids = [chunk.metadata['id'] for chunk in new_chunks]
-        DB.add_documents(new_chunks, ids=new_chunk_ids)
+        db.database.add_documents(new_chunks, ids=new_chunk_ids)
     else:
         print('✅ No new documents to add')
 
