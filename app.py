@@ -15,6 +15,9 @@ from src.config.assistant_config import IeeeAssistant
 from src.core.database import add_to_chroma
 from src.core.loader import load_pdf_directory, split_documents
 
+st.set_page_config(page_title='Iracema.AI', page_icon='💬', layout='centered')
+st.title('💬 Fale com a Iracema.IA')
+st.sidebar.title('Configurações')
 
 def _get_session():
     from streamlit.runtime import get_instance
@@ -57,9 +60,7 @@ def get_response(user_input, chat_history=st.session_state.chat_history):
 
 
 # Configuração da página do Streamlit
-st.set_page_config(page_title='Iracema.AI', page_icon='💬', layout='centered')
-st.title('💬 Fale com a Iracema.IA')
-st.sidebar.title('Configurações')
+
 st.sidebar.button('Resetar Chat', on_click=reset_chat)
 
 
@@ -86,7 +87,7 @@ if user_query is not None and user_query != '':
 
     streamlit_feedback(
         feedback_type='thumbs',
-        optional_text_label='[Optional] Please provide an explanation',
+        optional_text_label='[Opcional] Por favor, forneça mais informações',
         key='feedback',
     )
 
