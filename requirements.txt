@@ -175,3 +175,4 @@ websockets==14.1 ; python_version >= "3.12.dev0" and python_version < "3.13.dev0
 wrapt==1.16.0 ; python_version >= "3.12.dev0" and python_version < "3.13.dev0"
 yarl==1.17.2 ; python_version >= "3.12.dev0" and python_version < "3.13.dev0"
 zipp==3.21.0 ; python_version >= "3.12.dev0" and python_version < "3.13.dev0"
+pysqlite3-binary
