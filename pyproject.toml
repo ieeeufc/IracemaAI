@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "ieee-assistant"
+version = "0.1.0"
+description = ""
+authors = ["yanndrade <ybamello@hotmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.*"
+langchain = "^0.3.7"
+python-dotenv = "^1.0.1"
+langchain-community = "^0.3.7"
+pypdf = "^5.1.0"
+langchain-huggingface = "^0.1.2"
+chromadb = "^0.5.18"
+langchain-experimental = "^0.3.3"
+langchain-nvidia-ai-endpoints = "^0.3.5"
+langchain-google-genai = "^2.0.5"
+langchain-chroma = "^0.1.4"
+streamlit = "^1.40.1"
+streamlit-feedback = "^0.1.3"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+pytest-cov = "^6.0.0"
+taskipy = "^1.14.0"
+ruff = "^0.7.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 79
+extend-exclude = ['migrations']
+
+[tool.ruff.lint]
+preview = true
+select = ['I', 'F', 'E', 'W', 'PL', 'PT']
+
+[tool.ruff.format]
+preview = true
+quote-style = 'single'
+
+[tool.taskipy.tasks]
+lint = 'ruff check .; ruff check . --diff'
+format = 'ruff check . --fix; ruff format .'
+run = 'streamlit run app.py'
+pre_test = 'task lint'
+test = 'pytest -s -x --cov=ieee_assistant -vv'
+post_test = 'coverage html'
